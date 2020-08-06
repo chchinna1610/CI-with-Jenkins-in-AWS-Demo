@@ -7,11 +7,12 @@ pipeline {
 	    }
 	}
 	stage('build') {
-            bat 'mvn package'
-                    }
-		} 
-            }
-        
+	    steps {
+            	bat 'mvn package'
+                }
+	} 
+      }
+  }      
 	
 	//stage('Deploy') {
 	  //  steps {
