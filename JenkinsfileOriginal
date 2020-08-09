@@ -25,7 +25,7 @@ pipeline {
 	}
 	stage('Deploy artifact from Nexus to Tomcat container') {
 	    steps {
-	    	bat "C:\curl-7.70.0-win64-mingw\bin\curl -u admin:admin -o C:\apache-tomcat-8.5.55\webapps\myapp.war http://localhost:8082/nexus/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.30/projectIGI-1.30.war"
+	    	bat "C:/curl-7.70.0-win64-mingw/bin/curl -u admin:admin -o C:/apache-tomcat-8.5.55/webapps/myapp.war http://localhost:8082/nexus/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.30/projectIGI-1.30.war"
     	    }
 	}    
      }
