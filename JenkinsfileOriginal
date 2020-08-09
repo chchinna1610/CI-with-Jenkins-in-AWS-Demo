@@ -11,18 +11,21 @@ pipeline {
             	bat 'mvn package'
                 }
 	} 
-	stage("Sonarqube analysis") {
+	stage('Sonarqube analysis') {
 	    steps {
 	    	withSonarQubeEnv('sonar') {
     			bat "mvn sonar:sonar"
 		}
 	    }	
 	}   
-	stage('Deploy') {
+	stage('Publish artifact to Nexus repository') {
 	    steps {
 		nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'myNewRepo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'C:\\Program Files (x86)\\Jenkins\\jobs\\sonar-job\\workspace\\project\\target\\ProjectIGI-1.1.war']], mavenCoordinate: [artifactId: 'projectRnD', groupId: 'com.ci.jenkins', packaging: 'war', version: '1.1']]]
 	    }
 	}
+	stage('Deploy artifact from Nexus to Tomcat container') {
+	    step {
+	    	bat "C:\curl-7.70.0-win64-mingw\bin\curl -u admin:admin -o C:\apache-tomcat-8.5.55\webapps\myapp.war http://localhost:8082/nexus/repository/myNewRepo/com/ci/jenkins/projectRnD/1.1/projectRnD-1.1.war"
     }
 }
 	
