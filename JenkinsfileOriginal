@@ -14,7 +14,7 @@ pipeline {
 	stage("Sonarqube analysis") {
 	    steps {
 	    	withSonarQubeEnv('sonar') {
-    			bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
+    			bat "mvn sonar:sonar"
 		}
 	    }	
 	}   
