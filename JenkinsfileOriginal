@@ -11,13 +11,18 @@ pipeline {
             	bat 'mvn package'
                 }
 	} 
-      }
-  }      
-	
-	//stage('Deploy') {
-	  //  steps {
-	//	nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'C:\\Program Files (x86)\\Jenkins\\jobs\\sonar-job\\workspace\\project\\target\\ProjectIGI-1.1.war']], mavenCoordinate: [artifactId: 'projectRnD', groupId: 'com.ci.jenkins', packaging: 'war', version: '1.3']]]
-	  //  }
-	//}
-    
+	stage("Sonarqube analysis") {
+	    step {
+	    	withSonarQubeEnv('sonar') {
+    			bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
+		}
+	    }	
+	}   
+	stage('Deploy') {
+	    steps {
+		nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'C:\\Program Files (x86)\\Jenkins\\jobs\\sonar-job\\workspace\\project\\target\\ProjectIGI-1.1.war']], mavenCoordinate: [artifactId: 'projectRnD', groupId: 'com.ci.jenkins', packaging: 'war', version: '1.3']]]
+	    }
+	}
+    }
+}
 	
