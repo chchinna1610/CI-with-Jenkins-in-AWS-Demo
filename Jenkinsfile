@@ -21,5 +21,10 @@ pipeline {
 					echo "Deployment to nexus successfully"
 			}
 		}
+		Stage('Send Build') {
+      		        steps {
+           			jiraSendBuildInfo branch: 'MYP-1', site: 'cooldsachin.atlassian.net'
+       			}
+    		}
 	}
 }
