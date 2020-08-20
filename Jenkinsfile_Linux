@@ -18,7 +18,7 @@ pipeline {
 		nexusPublisher nexusInstanceId: '1234', nexusRepositoryId: 'myNexusRepo', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/sonar_nexus_tomcat_pipeline_job/project/target/ProjectIGI-1.1.war']], mavenCoordinate: [artifactId: 'projectIGI', groupId: 'com.ci.jenkins', packaging: 'war', version: '1.${BUILD_NUMBER}']]]
 	    }
 	}
-	7*stage('Deploy artifact from Nexus to Tomcat container') {
+	/*stage('Deploy artifact from Nexus to Tomcat container') {
 	    steps {
 	    	//sh "curl -u sachin:sachin -o C:/apache-tomcat-8.5.55/webapps/myapp.war http://35.197.81.194:8081/nexus/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.${BUILD_NUMBER}/projectIGI-1.${BUILD_NUMBER}.war"
     	    	sh "curl -u sachin:sachin --upload-file http://35.197.81.194:8081/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.${BUILD_NUMBER}/projectIGI-1.${BUILD_NUMBER}.war http://35.193.37.47:8080//manager/deploy?path=/myapp"
