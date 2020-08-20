@@ -21,7 +21,7 @@ pipeline {
 	stage('Deploy artifact from Nexus to Tomcat container') {
 	    steps {
 	    	//sh "curl -u sachin:sachin -o C:/apache-tomcat-8.5.55/webapps/myapp.war http://35.197.81.194:8081/nexus/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.${BUILD_NUMBER}/projectIGI-1.${BUILD_NUMBER}.war"
-    	    	sh "curl -u sachin:sachin -T http://35.197.81.194:8081/nexus/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.${BUILD_NUMBER}/projectIGI-1.${BUILD_NUMBER}.war http://35.193.37.47:8080//manager/deploy?path=/myapp"
+    	    	sh "curl -u sachin:sachin -T http://35.197.81.194:8081/repository/myNexusRepo/com/ci/jenkins/projectIGI/1.${BUILD_NUMBER}/projectIGI-1.${BUILD_NUMBER}.war http://35.193.37.47:8080//manager/deploy?path=/myapp"
 	    }
 	}    
      }
