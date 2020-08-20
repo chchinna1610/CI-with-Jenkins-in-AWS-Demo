@@ -1,12 +1,7 @@
 pipeline {
     agent any
     stages {
-    	stage('Git-checkout') {
-	    steps {
-	        git credentialsId: 'github', url: 'https://github.com/cooldsachin/CI-with-Jenkins-in-AWS-Demo.git'
-	    }
-	}
-	stage('build') {
+    	stage('build') {
 	    steps {
             	bat 'mvn package'
                 }
