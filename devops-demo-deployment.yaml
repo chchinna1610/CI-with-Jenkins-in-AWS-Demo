@@ -1,37 +1,39 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: devops-demo-service
+  name: devops-demo
   labels:
-    name: devops-demo-service
-    app: app-devops-demo-deployment
+    name: devops-demo
+    app: devops-demo
 spec:
   ports:
-  - port: 80
-    targetPort: 80
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
   type: LoadBalancer
   selector:
-     name: devops-demo-service
-     app: app-devops-demo-deployment
+     name: devops-demo
+     app: devops-demo
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-demo-deployment
+  name: devops-demo
   labels:
-    app: app-devops-demo-deployment
+    app: devops-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: devops-demo-deployment
-      app: app-devops-demo-deployment
+      name: devops-demo
+      app: devops-demo
   template:
     metadata:
-      name: devops-demo-deployment
+      name: devops-demo
       labels:
-        name: devops-demo-deployment
-        app: app-devops-demo-deployment
+        name: devops-demo
+        app: devops-demo
 
     spec:
       containers:
@@ -49,7 +51,7 @@ spec:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: devops-demo-deployment
+  name: devops-demo
   namespace: default
 spec:
   maxReplicas: 5
@@ -57,6 +59,6 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: devops-demo-deployment
+    name: devops-demo
   targetCPUUtilizationPercentage: 80
 
