@@ -2,8 +2,8 @@ FROM octopusdeploy/randomquotesjavabuild AS build-env
 WORKDIR /app
 
 # Copy pom and get dependencies as seperate layers
-COPY pom.xml ./
-RUN mvn dependency:resolve
+#COPY pom.xml ./
+#RUN mvn dependency:resolve
 
 # Copy everything else and build
 COPY . ./
