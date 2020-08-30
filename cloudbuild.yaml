@@ -29,8 +29,7 @@ substitutions:
     _GKE_CLUSTER: k8s-cluster
     
     #Repository Specific configuration. DevOps can change this settings
-    _IMAGE: devops-demo
-    _DEPLOYMENTNAME: devops-demo-deployment
+    _DEPLOYMENTNAME: devops-demo
     _CONTAINERNAME: devops-demo    
     _REPO_NAME: CI-with-Jenkins-in-AWS-Demo
     
