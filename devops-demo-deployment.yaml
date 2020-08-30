@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-demo-service
+  labels:
+    name: devops-demo-service
+    app: app-devops-demo-deployment
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+  selector:
+     name: devops-demo-service
+     app: app-devops-demo-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-demo-deployment
+  labels:
+    app: app-devops-demo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: devops-demo-deployment
+      app: app-devops-demo-deployment
+  template:
+    metadata:
+      name: devops-demo-deployment
+      labels:
+        name: devops-demo-deployment
+        app: app-devops-demo-deployment
+
+    spec:
+      containers:
+      - name: devops-demo
+        image: gcr.io/parabolic-rope-278721/devops-demo
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxUnavailable: 0
+        maxSurge: 1
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: devops-demo-deployment
+  namespace: default
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: devops-demo-deployment
+  targetCPUUtilizationPercentage: 80
+
