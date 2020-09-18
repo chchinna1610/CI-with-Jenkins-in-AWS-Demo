@@ -16,7 +16,7 @@ steps:
   args:
   -  'apply'
   -  '-f'
-  -  './devops-demo-deploymant.yaml'
+  -  './devops-demo-deployment.yaml'
   - '${_CONTAINERNAME}=gcr.io/${_PROJECT}/${_CONTAINERNAME}:${_VERSION}'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
