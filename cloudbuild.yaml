@@ -25,8 +25,8 @@ steps:
 substitutions:
     #GCP Specific configuration. Please DON'T change anything
     _PROJECT: parabolic-rope-278721
-    _ZONE: us-central1-c	
-    _GKE_CLUSTER: k8s-cluster
+    _ZONE: southamerica-east1-c	
+    _GKE_CLUSTER: kubernetes-cluster
     
     #Repository Specific configuration. DevOps can change this settings
     _DEPLOYMENTNAME: devops-demo
